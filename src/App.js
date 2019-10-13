@@ -1,8 +1,9 @@
+import 'normalize.css';
+import './lib/styles/reset.scss';
+import './style.scss';
+
 import Main from './views/layouts/main';
 import MainService from './service/main';
-
-import 'normalize.css';
-import './style.scss';
 
 (async function() {
   const main = new Main();

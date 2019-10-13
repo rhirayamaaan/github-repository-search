@@ -1,21 +1,26 @@
+import './style.scss';
+
 export default class Header {
   static createChildElement() {
     return `
+    <div class="header__inner">
     <h1 class="header__title">Repositoies Search Service for Github</h1>
     <p class="header__search">
     <input
       type="text"
       class="header__searchInput"
       data-headersearch-parts="input"
+      placeholder="Search to..."
     >
     <button
       type="search"
       class="header__searchButton"
       data-headersearch-parts="submit"
     >
-      検索
+      <span class="material-icons">search</span>
     </button>
-    </p>`;
+    </p>
+    </div>`;
   }
 
   constructor() {
