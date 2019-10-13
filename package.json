@@ -1,0 +1,38 @@
+{
+  "name": "github-repository-search",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack-dev-server --mode development --env --hot --inline --config webpack.config.development.js",
+    "build": "webpack --env.production --mode production --config webpack.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hiraryo0213/github-repository-search.git"
+  },
+  "author": "Ryoya HIRAYAMA",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hiraryo0213/github-repository-search/issues"
+  },
+  "homepage": "https://github.com/hiraryo0213/github-repository-search#readme",
+  "devDependencies": {
+    "autoprefixer": "^9.6.4",
+    "css-loader": "^3.2.0",
+    "csswring": "^7.0.0",
+    "eslint": "^6.5.1",
+    "eslint-config-google": "^0.14.0",
+    "node-sass": "^4.12.0",
+    "postcss-loader": "^3.0.0",
+    "sass-loader": "^8.0.0",
+    "style-loader": "^1.0.0",
+    "webpack": "^4.41.1",
+    "webpack-cli": "^3.3.9",
+    "webpack-dev-server": "^3.8.2",
+    "webpack-merge": "^4.2.2"
+  },
+  "dependencies": {
+    "normalize.css": "^8.0.1"
+  }
+}
