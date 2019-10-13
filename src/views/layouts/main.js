@@ -5,10 +5,10 @@ import ErrorMessage from '../modules/errorMessage';
 const LOADING_CLASS_NAME = 'main--loading';
 
 export default class Main {
-  constructor(search) {
+  constructor() {
     const main = document.createElement('div');
     this.element = main;
-    this.header = new Header(search);
+    this.header = new Header();
     this.searchItems = new SearchItems();
     this.errorMessage = new ErrorMessage();
 
@@ -30,5 +30,9 @@ export default class Main {
   set data(data) {
     this.errorMessage.data = data.error;
     this.searchItems.data = data.items;
+  }
+
+  set searcher(searchFunction) {
+    this.header.searcher = searchFunction;
   }
 }

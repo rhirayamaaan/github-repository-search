@@ -18,11 +18,7 @@ export default class Header {
     </p>`;
   }
 
-  submit(submit) {
-    return (event) => submit(event, this.inputElement.value);
-  }
-
-  constructor(submit) {
+  constructor() {
     const root = document.createElement('div');
     root.classList.add('header');
 
@@ -34,10 +30,22 @@ export default class Header {
         '[data-headerSearch-parts="submit"]'
     );
 
-    this.submit = this.submit.bind(this);
-
-    this.submitElement.addEventListener('click', this.submit(submit), false);
+    this.hasSearcher = false;
 
     return this;
+  }
+
+  set searcher(submitFunction) {
+    if (this.hasSearcher) {
+      return;
+    }
+
+    this.submitElement.addEventListener(
+        'click',
+        () => submitFunction(this.inputElement.value),
+        false
+    );
+
+    this.hasSearcher = true;
   }
 }
