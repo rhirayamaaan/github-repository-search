@@ -35,9 +35,8 @@ export default class SearchItems {
 
   rebind(items = null) {
     this.element.innerHTML = '';
-    this.element.classList.add('searchItems--none');
 
-    if (items) {
+    if (items !== null) {
       if (items.length <= 0) {
         return;
       }
@@ -54,6 +53,8 @@ export default class SearchItems {
             ).element
         );
       }
+    } else {
+      this.element.classList.add('searchItems--none');
     }
   }
 }

@@ -25,20 +25,44 @@ class ItemsEntity extends Array {
   }
 }
 
-export class MainEntity {
-  constructor(items) {
-    this.items = items;
+const MainErrorMessage = {
+  ZERO_MATCH: '検索結果がありませんでした。',
+  UNPROCESSABLE_ENTITY: '検索ワードを正しく入力してください。',
+  OTHER: '問題が発生しました。',
+};
+
+class MainErrorEntity {
+  constructor(exception = null, isZeroMatch = false) {
+    this.message = null;
+
+    if (exception instanceof FetchException) {
+      if (exception.status === 422) {
+        this.message = MainErrorMessage.UNPROCESSABLE_ENTITY;
+      } else {
+        this.message = MainErrorMessage.OTHER;
+      }
+
+      return this;
+    }
+
+    if (exception instanceof Error) {
+      this.message = MainErrorMessage.OTHER;
+      return this;
+    }
+
+    if (isZeroMatch) {
+      this.message = MainErrorMessage.ZERO_MATCH;
+      return this;
+    }
+
     return this;
   }
 }
 
-export class MainErrorEntity {
-  constructor(exception) {
-    this.status = null;
-
-    if (exception instanceof FetchException) {
-      this.status = exception.status;
-    }
+export class MainEntity {
+  constructor(items = null, exception = null, isZeroMatch = false) {
+    this.items = items;
+    this.error = new MainErrorEntity(exception, isZeroMatch);
 
     return this;
   }
@@ -55,16 +79,18 @@ export default class MainService {
       const response = await this.repository.get(parameter);
       return this.mapper(response);
     } catch (error) {
-      return new MainErrorEntity(error);
+      return new MainEntity(null, error);
     }
   }
 
   mapper(response) {
-    const Items = new ItemsEntity();
+    const items = new ItemsEntity();
+
+    let isZeroMatch = false;
 
     if (response) {
       for (const item of response.items) {
-        Items.append(
+        items.append(
             new ItemEntity(
                 item.id,
                 item.name,
@@ -74,8 +100,14 @@ export default class MainService {
             )
         );
       }
+
+      if (items.length <= 0) {
+        isZeroMatch = true;
+      }
+    } else {
+      new Error('Response is null or undefined');
     }
 
-    return new MainEntity(Items);
+    return new MainEntity(items, null, isZeroMatch);
   }
 }
