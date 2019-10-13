@@ -70,13 +70,13 @@ export class MainEntity {
 
 export default class MainService {
   constructor() {
-    this.repository = new Fetcher(`${Url.SEARCH_API}`);
+    this.fetcher = new Fetcher(`${Url.SEARCH_API}`);
     return this;
   }
 
   async get(parameter) {
     try {
-      const response = await this.repository.get(parameter);
+      const response = await this.fetcher.get(parameter);
       return this.mapper(response);
     } catch (error) {
       return new MainEntity(null, error);
