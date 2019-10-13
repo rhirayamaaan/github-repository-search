@@ -1,27 +1,44 @@
+import FetchException from './exception';
+
 export default class Fetcher {
   constructor(url) {
     this.request = new XMLHttpRequest();
     this.request.responseType = 'json';
     this.url = url;
-    this.request.open('GET', url, true);
   }
 
-  async get() {
+  async get(parameter = {}) {
+    const stringParameter = Object.entries(parameter)
+        .map((element) => `${element[0]}=${encodeURIComponent(element[1])}`)
+        .join('&');
+
+    this.request.open('GET', `${this.url}?${stringParameter}`, true);
+
     return new Promise((resolve, reject) => {
       this.request.onload = () => {
         if (this.request.readyState === 4 && this.request.status === 200) {
           resolve(this.request.response);
         } else {
-          reject(new Error(this.request.statusText));
+          reject(
+              new FetchException(this.request.status, this.request.statusText)
+          );
         }
       };
 
       this.request.onerror = () => {
-        reject(new Error(this.request.statusText));
+        reject(
+            new FetchException(this.request.status, this.request.statusText)
+        );
       };
 
       this.request.onabort = () => {
-        resolve(`${this.url} has been aborted`);
+        resolve(
+            new FetchException(
+                this.request.status,
+                `${this.url} has been aborted`,
+                true
+            )
+        );
       };
 
       this.abort();

@@ -1,5 +1,6 @@
 import Fetcher from '../fetcher';
 import Url from '../config/url';
+import FetchException from '../fetcher/exception';
 
 class ItemEntity {
   constructor(id, name, isPrivate, description, language) {
@@ -24,22 +25,38 @@ class ItemsEntity extends Array {
   }
 }
 
-class MainEntity {
+export class MainEntity {
   constructor(items) {
     this.items = items;
     return this;
   }
 }
 
+export class MainErrorEntity {
+  constructor(exception) {
+    this.status = null;
+
+    if (exception instanceof FetchException) {
+      this.status = exception.status;
+    }
+
+    return this;
+  }
+}
+
 export default class MainService {
-  constructor(query) {
-    this.repository = new Fetcher(`${Url.SEARCH_API}?q=${query}`);
+  constructor() {
+    this.repository = new Fetcher(`${Url.SEARCH_API}`);
     return this;
   }
 
-  async get() {
-    const response = await this.repository.get();
-    return this.mapper(response);
+  async get(parameter) {
+    try {
+      const response = await this.repository.get(parameter);
+      return this.mapper(response);
+    } catch (error) {
+      return new MainErrorEntity(error);
+    }
   }
 
   mapper(response) {
@@ -47,13 +64,15 @@ export default class MainService {
 
     if (response) {
       for (const item of response.items) {
-        Items.append(new ItemEntity(
-            item.id,
-            item.name,
-            item.private,
-            item.description,
-            item.language
-        ));
+        Items.append(
+            new ItemEntity(
+                item.id,
+                item.name,
+                item.private,
+                item.description,
+                item.language
+            )
+        );
       }
     }
 
