@@ -28,12 +28,12 @@ export default class SearchItems {
     const ul = document.createElement('ul');
     this.element = ul;
 
-    this.rebind();
+    this.data = null;
 
     return this;
   }
 
-  rebind(items = null) {
+  set data(items = null) {
     this.element.innerHTML = '';
 
     if (items !== null) {

@@ -5,12 +5,12 @@ export default class ErrorMessage {
 
   constructor(error) {
     this.element = document.createElement('div');
-    this.rebind(error);
+    this.data = error;
 
     return this;
   }
 
-  rebind(error = null) {
+  set data(error = null) {
     if (error !== null && error.message !== null) {
       this.element.classList.remove('errorMessage--none');
       this.element.innerHTML = ErrorMessage.createChildElement(error.message);

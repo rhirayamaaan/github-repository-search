@@ -7,8 +7,7 @@ import './style.scss';
 (async function() {
   const search = async (_event, query = 'query') => {
     main.isLoading = true;
-
-    main.rebind(await mainService.get({q: query}));
+    main.data = await mainService.get({q: query});
     main.isLoading = false;
   };
 

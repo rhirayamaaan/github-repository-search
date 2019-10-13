@@ -27,8 +27,8 @@ export default class Main {
     }
   }
 
-  rebind(data) {
-    this.errorMessage.rebind(data.error);
-    this.searchItems.rebind(data.items);
+  set data(data) {
+    this.errorMessage.data = data.error;
+    this.searchItems.data = data.items;
   }
 }
