@@ -31,7 +31,7 @@
     color: $global-color-white;
 
     &:hover,
-    &:active {
+    &:focus {
       z-index: 1;
     }
 
@@ -49,9 +49,15 @@
     margin-left: -1px;
     width: 60px;
     border: 1px solid $global-color-white;
+    background-color: rgba($global-color-white, 0);
     color: $global-color-white;
     height: 40px;
     flex: 0 1 60px;
     z-index: 0;
+    transition: background-color 0.1s ease-in-out;
+
+    &:hover {
+      background-color: rgba($global-color-white, 1 - $global-opacity);
+    }
   }
 }

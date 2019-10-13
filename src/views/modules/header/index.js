@@ -37,6 +37,13 @@ export default class Header {
 
     this.hasSearcher = false;
 
+    this.inputElement.addEventListener('keypress', (event) => {
+      if (event.keyCode === 13) {
+        this.submitElement.click();
+        this.inputElement.blur();
+      }
+    });
+
     return this;
   }
 
