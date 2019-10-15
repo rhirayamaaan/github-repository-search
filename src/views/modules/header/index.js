@@ -11,13 +11,13 @@ export default class Header {
     </h1>
     <p class="${NAMESPACE}__search">
     <input
-      type="text"
+      type="search"
       class="${NAMESPACE}__searchInput"
       data-${NAMESPACE}-parts="input"
       placeholder="Search to..."
     >
     <button
-      type="search"
+      type="button"
       class="${NAMESPACE}__searchButton"
       data-${NAMESPACE}-parts="submit"
     >
