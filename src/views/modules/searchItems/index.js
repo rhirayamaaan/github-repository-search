@@ -50,6 +50,7 @@ export default class SearchItems {
 
     if (items !== null) {
       if (items.length <= 0) {
+        this.element.classList.add(NONE_MODIFIER_CLASSNAME);
         return;
       }
 

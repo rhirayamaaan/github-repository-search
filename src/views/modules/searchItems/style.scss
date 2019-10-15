@@ -6,6 +6,10 @@
   word-break: break-all;
   word-wrap: break-word;
 
+  &.searchItems--none {
+    display: none;
+  }
+
   .searchItems__item {
     margin-top: -1px;
   }
