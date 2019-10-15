@@ -1,11 +1,11 @@
 .header {
-  padding: 32px;
   background-color: $global-color-black;
   color: $global-color-white;
 
   .header__inner {
-    max-width: 960px;
+    max-width: $global-max-width;
     margin: 0 auto;
+    padding: 32px;
   }
 
   .header__title {
@@ -54,10 +54,9 @@
     height: 40px;
     flex: 0 1 60px;
     z-index: 0;
-    transition: background-color 0.1s ease-in-out;
+  }
 
-    &:hover {
-      background-color: rgba($global-color-white, 1 - $global-opacity);
-    }
+  .header__searchButtonIcon {
+    fill: $global-color-white;
   }
 }

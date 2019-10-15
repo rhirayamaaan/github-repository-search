@@ -2,14 +2,19 @@ import SearchItems from '../modules/searchItems';
 import Header from '../modules/header';
 import ErrorMessage from '../modules/errorMessage';
 
+import './style.scss';
+
 const NAMESPACE = 'main';
 const LOADING_MODIFIER_CLASSNAME = `${NAMESPACE}--loading`;
 
 export default class Main {
   constructor() {
-    const main = document.createElement('div');
-    main.classList.add(NAMESPACE);
-    this.element = main;
+    this.element = document.createElement('div');
+    this.element.classList.add(NAMESPACE);
+
+    this.childElement = document.createElement('div');
+    this.childElement.classList.add(`${NAMESPACE}__loading`);
+
     this.header = new Header();
     this.searchItems = new SearchItems();
     this.errorMessage = new ErrorMessage();
@@ -17,6 +22,8 @@ export default class Main {
     this.element.appendChild(this.header.element);
     this.element.appendChild(this.searchItems.element);
     this.element.appendChild(this.errorMessage.element);
+
+    this.element.appendChild(this.childElement);
 
     return this;
   }

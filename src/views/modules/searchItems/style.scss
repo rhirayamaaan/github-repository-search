@@ -1,0 +1,48 @@
+.searchItems {
+  margin: 0 auto;
+  padding-top: 1px;
+  max-width: $global-max-width;
+  background-color: $global-color-white;
+  word-break: break-all;
+  word-wrap: break-word;
+
+  .searchItems__item {
+    margin-top: -1px;
+  }
+
+  .searchItems__link {
+    display: block;
+    border-top: 1px solid $global-color-gray-3;
+    border-bottom: 1px solid $global-color-gray-3;
+    padding: 16px 32px;
+
+    @media (min-width: 960px) {
+      margin: 0 32px;
+      padding: 16px 0;
+    }
+  }
+
+  .searchItems__name {
+    font-size: 15px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: bold;
+  }
+
+  .searchItems__description,
+  .searchItems__language {
+    margin-top: 4px;
+  }
+
+  .searchItems__description {
+    overflow: hidden;
+    margin-top: 8px;
+    max-height: 13px * 1.2 * 2; // font-size * line-height
+    color: $text-color;
+  }
+
+  .searchItems__language {
+    color: $text-color-sub;
+  }
+}

@@ -7,12 +7,16 @@ $global-color-black: #222;
 
 $global-color-white: #fff;
 
-$global-color-purple-1: #5600ff;
-$global-color-purple-2: #b691ff;
+$global-color-purple-1: #3300ff;
+$global-color-purple-2: #af99ff;
+
+$global-opacity: 0.8;
+
+$global-max-width: 960px;
 
 $text-color: $global-color-black;
-$text-color-hover: $global-color-gray-1;
+$text-color-sub: $global-color-gray-1;
 
 $link-color: $global-color-purple-1;
 
-$global-opacity: 0.8;
+$tap-highlight-color: rgba($global-color-purple-2, 1 - $global-opacity);

@@ -9,8 +9,12 @@ class SearchItem {
     return `<a class="${NAMESPACE}__link" href="${url}" target="_blank">
     <p class="${NAMESPACE}__name">${name}</p>
     ${isPrivate ? `<p class="${NAMESPACE}__private">Private</p>` : ''}
-    <p class="${NAMESPACE}__description">${description}</p>
-    <p class="${NAMESPACE}__language">${language}</p>
+    ${
+      description ?
+        `<p class="${NAMESPACE}__description">${description}</p>` :
+        ''
+}
+    ${language ? `<p class="${NAMESPACE}__language">${language}</p>` : ''}
     </a>`;
   }
 

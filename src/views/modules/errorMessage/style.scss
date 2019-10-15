@@ -1,0 +1,13 @@
+.errorMessage {
+  margin: 16px auto 0 auto;
+  padding: 0 32px;
+  max-width: $global-max-width;
+
+  .errorMessage__content {
+    padding: 80px 32px;
+    background-color: $global-color-gray-3;
+    font-size: 17px;
+    font-weight: bold;
+    text-align: center;
+  }
+}

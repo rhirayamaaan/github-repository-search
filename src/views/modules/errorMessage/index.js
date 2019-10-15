@@ -5,7 +5,7 @@ const NONE_MODIFIER_CLASSNAME = `${NAMESPACE}--none`;
 
 export default class ErrorMessage {
   static createChildElement(message) {
-    return `<p>${message}</p>`;
+    return `<p class="errorMessage__content">${message}</p>`;
   }
 
   constructor(error) {
