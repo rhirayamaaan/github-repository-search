@@ -5,17 +5,20 @@ const NAMESPACE = 'searchItems';
 const NONE_MODIFIER_CLASSNAME = `${NAMESPACE}--none`;
 
 class SearchItem {
-  static createChildElement(name, isPrivate, description, language) {
-    return `<p class="${NAMESPACE}__name">${name}</p>
+  static createChildElement(name, isPrivate, url, description, language) {
+    return `<a class="${NAMESPACE}__link" href="${url}" target="_blank">
+    <p class="${NAMESPACE}__name">${name}</p>
     ${isPrivate ? `<p class="${NAMESPACE}__private">Private</p>` : ''}
     <p class="${NAMESPACE}__description">${description}</p>
-    <p class="${NAMESPACE}__language">${language}</p>`;
+    <p class="${NAMESPACE}__language">${language}</p>
+    </a>`;
   }
 
-  constructor(name, isPrivate, description, language) {
+  constructor(name, isPrivate, url, description, language) {
     const innerHTML = SearchItem.createChildElement(
         name,
         isPrivate,
+        url,
         description,
         language
     );
@@ -53,6 +56,7 @@ export default class SearchItems {
             new SearchItem(
                 item.name,
                 item.isPrivate,
+                item.url,
                 item.description,
                 item.language
             ).element

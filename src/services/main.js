@@ -3,10 +3,11 @@ import Url from '../config/url';
 import FetchException from '../fetcher/exception';
 
 class ItemEntity {
-  constructor(id, name, isPrivate, description, language) {
+  constructor(id, name, isPrivate, url, description, language) {
     this.id = id;
     this.name = name;
     this.isPrivate = isPrivate;
+    this.url = url;
     this.description = description;
     this.language = language;
 
@@ -95,6 +96,7 @@ export default class MainService {
                 item.id,
                 item.name,
                 item.private,
+                item.html_url,
                 item.description,
                 item.language
             )
