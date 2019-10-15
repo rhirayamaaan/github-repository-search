@@ -8,7 +8,7 @@ import MainService from './services/main';
   const main = new Main();
   const mainService = new MainService('query');
 
-  main.searcher = async (query = 'query') => {
+  main.searcher = async (query = '') => {
     main.isLoading = true;
     main.data = await mainService.get({q: query});
     main.isLoading = false;
