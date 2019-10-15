@@ -1,6 +1,5 @@
 import 'normalize.css';
 import './lib/styles/reset.scss';
-import './style.scss';
 
 import Main from './views/layouts/main';
 import MainService from './services/main';
