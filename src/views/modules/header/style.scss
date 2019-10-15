@@ -3,24 +3,24 @@
   background-color: $global-color-black;
   color: $global-color-white;
 
-  & .header__inner {
+  .header__inner {
     max-width: 960px;
     margin: 0 auto;
   }
 
-  & .header__title {
+  .header__title {
     font-size: 21px;
     text-align: center;
   }
 
-  & .header__search {
+  .header__search {
     display: flex;
     position: relative;
     margin-top: 16px;
     font-size: 0;
   }
 
-  & .header__searchInput {
+  .header__searchInput {
     position: relative;
     flex: 1 0 auto;
     border: 1px solid $global-color-white;
@@ -44,7 +44,7 @@
     }
   }
 
-  & .header__searchButton {
+  .header__searchButton {
     position: relative;
     margin-left: -1px;
     width: 60px;
