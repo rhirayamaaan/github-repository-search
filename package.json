@@ -17,7 +17,7 @@
   "bugs": {
     "url": "https://github.com/hiraryo0213/github-repository-search/issues"
   },
-  "homepage": "https://github.com/hiraryo0213/github-repository-search",
+  "homepage": "https://hiraryo0213.github.io/github-repository-search/",
   "devDependencies": {
     "autoprefixer": "^9.6.4",
     "css-loader": "^3.2.0",
