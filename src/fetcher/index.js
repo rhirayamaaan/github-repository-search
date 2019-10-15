@@ -1,9 +1,12 @@
 import FetchException from './exception';
 
+const TIMEOUT = 5000;
+
 export default class Fetcher {
   constructor(url) {
     this.request = new XMLHttpRequest();
     this.request.responseType = 'json';
+    this.request.timeout = TIMEOUT;
     this.url = url;
   }
 
@@ -39,6 +42,10 @@ export default class Fetcher {
                 true
             )
         );
+      };
+
+      this.request.ontimeout = () => {
+        reject(new FetchException(this.request.status, 'Timeout Error'));
       };
 
       this.abort();
