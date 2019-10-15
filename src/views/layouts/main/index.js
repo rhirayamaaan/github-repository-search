@@ -1,6 +1,6 @@
-import SearchItems from '../modules/searchItems';
-import Header from '../modules/header';
-import ErrorMessage from '../modules/errorMessage';
+import SearchItems from '../../modules/searchItems';
+import Header from '../../modules/header';
+import ErrorMessage from '../../modules/errorMessage';
 
 import './style.scss';
 
