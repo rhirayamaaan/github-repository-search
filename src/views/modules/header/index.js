@@ -1,21 +1,25 @@
 import './style.scss';
 
+const NAMESPACE = 'header';
+
 export default class Header {
   static createChildElement() {
     return `
-    <div class="header__inner">
-    <h1 class="header__title">Repositoies Search Service for Github</h1>
-    <p class="header__search">
+    <div class="${NAMESPACE}__inner">
+    <h1 class="${NAMESPACE}__title">
+      Repositoies Search Service for Github
+    </h1>
+    <p class="${NAMESPACE}__search">
     <input
       type="text"
-      class="header__searchInput"
-      data-headersearch-parts="input"
+      class="${NAMESPACE}__searchInput"
+      data-${NAMESPACE}-parts="input"
       placeholder="Search to..."
     >
     <button
       type="search"
-      class="header__searchButton"
-      data-headersearch-parts="submit"
+      class="${NAMESPACE}__searchButton"
+      data-${NAMESPACE}-parts="submit"
     >
       <span class="material-icons">search</span>
     </button>
@@ -24,15 +28,14 @@ export default class Header {
   }
 
   constructor() {
-    const root = document.createElement('div');
-    root.classList.add('header');
-
-    root.innerHTML = Header.createChildElement();
-
-    this.element = root;
-    this.inputElement = root.querySelector('[data-headerSearch-parts="input"]');
-    this.submitElement = root.querySelector(
-        '[data-headerSearch-parts="submit"]'
+    this.element = document.createElement('div');
+    this.element.classList.add(NAMESPACE);
+    this.element.innerHTML = Header.createChildElement();
+    this.inputElement = this.element.querySelector(
+        `[data-${NAMESPACE}-parts="input"]`
+    );
+    this.submitElement = this.element.querySelector(
+        `[data-${NAMESPACE}-parts="submit"]`
     );
 
     this.hasSearcher = false;

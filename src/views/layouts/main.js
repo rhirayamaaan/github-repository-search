@@ -2,11 +2,13 @@ import SearchItems from '../modules/searchItems';
 import Header from '../modules/header';
 import ErrorMessage from '../modules/errorMessage';
 
-const LOADING_CLASS_NAME = 'main--loading';
+const NAMESPACE = 'main';
+const LOADING_MODIFIER_CLASSNAME = `${NAMESPACE}--loading`;
 
 export default class Main {
   constructor() {
     const main = document.createElement('div');
+    main.classList.add(NAMESPACE);
     this.element = main;
     this.header = new Header();
     this.searchItems = new SearchItems();
@@ -21,9 +23,9 @@ export default class Main {
 
   set isLoading(bool) {
     if (bool) {
-      this.element.classList.add(LOADING_CLASS_NAME);
+      this.element.classList.add(LOADING_MODIFIER_CLASSNAME);
     } else {
-      this.element.classList.remove(LOADING_CLASS_NAME);
+      this.element.classList.remove(LOADING_MODIFIER_CLASSNAME);
     }
   }
 

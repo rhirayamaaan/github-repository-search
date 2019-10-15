@@ -1,11 +1,15 @@
 import './style.scss';
 
+const NAMESPACE = 'searchItems';
+
+const NONE_MODIFIER_CLASSNAME = `${NAMESPACE}--none`;
+
 class SearchItem {
   static createChildElement(name, isPrivate, description, language) {
-    return `<p class="searchItems__name">${name}</p>
-    ${isPrivate ? '<p class="searchItems__private">Private</p>' : ''}
-    <p class="searchItems__description">${description}</p>
-    <p class="language">${language}</p>`;
+    return `<p class="${NAMESPACE}__name">${name}</p>
+    ${isPrivate ? `<p class="${NAMESPACE}__private">Private</p>` : ''}
+    <p class="${NAMESPACE}__description">${description}</p>
+    <p class="${NAMESPACE}__language">${language}</p>`;
   }
 
   constructor(name, isPrivate, description, language) {
@@ -17,6 +21,7 @@ class SearchItem {
     );
 
     this.element = document.createElement('li');
+    this.element.classList.add(`${NAMESPACE}__item`);
     this.element.innerHTML = innerHTML;
 
     return this;
@@ -25,8 +30,8 @@ class SearchItem {
 
 export default class SearchItems {
   constructor() {
-    const ul = document.createElement('ul');
-    this.element = ul;
+    this.element = document.createElement('ul');
+    this.element.classList.add(NAMESPACE);
 
     this.data = null;
 
@@ -41,7 +46,7 @@ export default class SearchItems {
         return;
       }
 
-      this.element.classList.remove('searchItems--none');
+      this.element.classList.remove(NONE_MODIFIER_CLASSNAME);
 
       for (const item of items) {
         this.element.appendChild(
@@ -54,7 +59,7 @@ export default class SearchItems {
         );
       }
     } else {
-      this.element.classList.add('searchItems--none');
+      this.element.classList.add(NONE_MODIFIER_CLASSNAME);
     }
   }
 }
