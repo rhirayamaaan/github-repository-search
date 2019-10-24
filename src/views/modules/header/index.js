@@ -55,11 +55,11 @@ export default class Header {
       return;
     }
 
-    this.submitElement.addEventListener(
-        'click',
-        () => submitFunction(this.inputElement.value),
-        false
-    );
+    const searchFunction = () => submitFunction(this.inputElement.value);
+
+    this.inputElement.addEventListener('input', searchFunction, false);
+
+    this.submitElement.addEventListener('click', searchFunction, false);
 
     this.hasSearcher = true;
   }

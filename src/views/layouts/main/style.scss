@@ -1,29 +1,22 @@
 .main {
   padding-bottom: 16px;
 
-  &::before {
-    content: "";
-    display: none;
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    background-color: rgba($global-color-white, $global-opacity);
-    z-index: 5000000;
-  }
+  // &::before {
+  //   content: "";
+  //   display: none;
+  //   position: fixed;
+  //   width: 100%;
+  //   height: 100%;
+  //   top: 0;
+  //   left: 0;
+  //   background-color: rgba($global-color-white, $global-opacity);
+  //   z-index: 5000000;
+  // }
 
   .main__loading {
     display: none;
-    position: fixed;
-    width: 64px;
-    height: 64px;
-    background-color: $global-color-white;
-    border-radius: 8px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 5000001;
+    position: relative;
+    height: 150px;
 
     &::before,
     &::after {
