@@ -4,6 +4,10 @@ export function throttle(func, delay = 0) {
   let execTime = -delay;
   let asyncSetTimeout = null;
   const execute = (...rest) => async () => {
+    if (asyncSetTimeout instanceof AsyncSetTimeout) {
+      asyncSetTimeout.cansel();
+    }
+
     asyncSetTimeout = null;
     execTime = performance.now();
     return await func(...rest);
