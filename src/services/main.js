@@ -1,6 +1,7 @@
 import Fetcher from '../fetcher';
 import Url from '../config/url';
 import FetchException from '../fetcher/exception';
+import {escapeHTML} from '../utilities/escapeHTML';
 
 class ItemEntity {
   constructor(id, name, isPrivate, url, description, language) {
@@ -80,6 +81,7 @@ export default class MainService {
       const response = await this.fetcher.get(parameter);
       return this.mapper(response);
     } catch (error) {
+      console.error(error);
       return new MainEntity(null, error);
     }
   }
@@ -94,10 +96,10 @@ export default class MainService {
         items.append(
             new ItemEntity(
                 item.id,
-                item.name,
+                escapeHTML(item.name),
                 item.private,
                 item.html_url,
-                item.description,
+                escapeHTML(item.description),
                 item.language
             )
         );
