@@ -1,7 +1,7 @@
-import AsyncSetTimeout from './AsyncSetTimeout';
+import AsyncSetTimeout from "./AsyncSetTimeout";
 
 export function throttle(func, delay = 0) {
-  let execTime = -delay;
+  let executeTime = -delay;
   let asyncSetTimeout = null;
   let runExecute = false;
 
@@ -15,21 +15,21 @@ export function throttle(func, delay = 0) {
     }
 
     asyncSetTimeout = null;
-    execTime = performance.now();
+    executeTime = performance.now();
     const data = await func(...rest);
     runExecute = false;
     return data;
   };
 
   return async (...rest) => {
-    if (execTime + delay > performance.now()) {
+    if (executeTime + delay > performance.now()) {
       if (asyncSetTimeout instanceof AsyncSetTimeout) {
         asyncSetTimeout.cansel();
       }
 
       asyncSetTimeout = new AsyncSetTimeout(
-          execute(...rest),
-          execTime + delay - performance.now()
+        execute(...rest),
+        executeTime + delay - performance.now()
       );
       return await asyncSetTimeout.execute();
     }
