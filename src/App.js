@@ -7,7 +7,7 @@ import {throttle} from './utilities/throttle';
 
 (async function() {
   const main = new Main();
-  const mainService = new MainService('query');
+  const mainService = new MainService();
 
   const throttleMainSerivceGetter = throttle(
       (...rest) => mainService.get(...rest),
