@@ -5,7 +5,7 @@ import Main from './views/layouts/main';
 import MainService from './services/main';
 import {throttle} from './utilities/throttle';
 
-(async function() {
+(function() {
   const main = new Main();
   const mainService = new MainService();
 
