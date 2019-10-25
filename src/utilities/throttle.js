@@ -1,4 +1,4 @@
-import AsyncSetTimeout from "./AsyncSetTimeout";
+import AsyncSetTimeout from './AsyncSetTimeout';
 
 export function throttle(func, delay = 0) {
   let executeTime = -delay;
@@ -28,8 +28,8 @@ export function throttle(func, delay = 0) {
       }
 
       asyncSetTimeout = new AsyncSetTimeout(
-        execute(...rest),
-        executeTime + delay - performance.now()
+          execute(...rest),
+          executeTime + delay - performance.now()
       );
       return await asyncSetTimeout.execute();
     }
