@@ -3,14 +3,22 @@ import AsyncSetTimeout from './AsyncSetTimeout';
 export function throttle(func, delay = 0) {
   let execTime = -delay;
   let asyncSetTimeout = null;
+  let runExecute = false;
+
   const execute = (...rest) => async () => {
+    if (runExecute) {
+      return;
+    }
+
     if (asyncSetTimeout instanceof AsyncSetTimeout) {
       asyncSetTimeout.cansel();
     }
 
     asyncSetTimeout = null;
     execTime = performance.now();
-    return await func(...rest);
+    const data = await func(...rest);
+    runExecute = false;
+    return data;
   };
 
   return async (...rest) => {
@@ -25,6 +33,9 @@ export function throttle(func, delay = 0) {
       );
       return await asyncSetTimeout.execute();
     }
-    return execute(...rest)();
+
+    if (asyncSetTimeout === null) {
+      return execute(...rest)();
+    }
   };
 }

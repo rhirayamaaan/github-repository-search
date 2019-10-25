@@ -17,8 +17,7 @@ import {throttle} from './utilities/throttle';
   main.searcher = async (query = '') => {
     main.isLoading = true;
     main.data = {items: null, error: null};
-    const data = await throttleMainSerivceGetter({q: query});
-    main.data = data;
+    main.data = await throttleMainSerivceGetter({q: query});
     main.isLoading = false;
   };
 

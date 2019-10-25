@@ -19,6 +19,7 @@ export default class AsyncSetTimeout {
   cansel() {
     if (this.timerId) {
       clearTimeout(this.timerId);
+      this.timerId = null;
     }
   }
 }
