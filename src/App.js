@@ -14,11 +14,20 @@ import { throttle } from './utilities/throttle';
     2000
   );
 
+  const initialMainData = {
+    items: null,
+    error: null
+  };
+
   main.searcher = async (query = '') => {
     main.isLoading = true;
-    main.data = { items: null, error: null };
-    main.data = await throttleMainSerivceGetter({ q: query });
-    main.isLoading = false;
+    main.data = initialMainData;
+    await throttleMainSerivceGetter({ q: query })
+      .then(done => {
+        main.data = done;
+        main.isLoading = false;
+      })
+      .catch(() => {});
   };
 
   document.querySelector('#app').appendChild(main.element);
