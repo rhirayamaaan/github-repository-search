@@ -1,7 +1,7 @@
 import Fetcher from '../fetcher';
 import Url from '../config/url';
 import FetchException from '../fetcher/exception';
-import {escapeHTML} from '../utilities/escapeHTML';
+import { escapeHTML } from '../utilities/escapeHTML';
 
 class ItemEntity {
   constructor(id, name, isPrivate, url, description, language) {
@@ -30,7 +30,7 @@ class ItemsEntity extends Array {
 const MainErrorMessage = {
   ZERO_MATCH: '検索結果がありませんでした。',
   UNPROCESSABLE_ENTITY: '検索ワードを正しく入力してください。',
-  OTHER: '問題が発生しました。',
+  OTHER: '問題が発生しました。'
 };
 
 class MainErrorEntity {
@@ -94,14 +94,14 @@ export default class MainService {
     if (response) {
       for (const item of response.items) {
         items.append(
-            new ItemEntity(
-                item.id,
-                escapeHTML(item.name),
-                item.private,
-                item.html_url,
-                escapeHTML(item.description),
-                item.language
-            )
+          new ItemEntity(
+            item.id,
+            escapeHTML(item.name),
+            item.private,
+            item.html_url,
+            escapeHTML(item.description),
+            item.language
+          )
         );
       }
 

@@ -32,15 +32,15 @@ export default class Header {
     this.element.classList.add(NAMESPACE);
     this.element.innerHTML = Header.createChildElement();
     this.inputElement = this.element.querySelector(
-        `[data-${NAMESPACE}-parts="input"]`
+      `[data-${NAMESPACE}-parts="input"]`
     );
     this.submitElement = this.element.querySelector(
-        `[data-${NAMESPACE}-parts="submit"]`
+      `[data-${NAMESPACE}-parts="submit"]`
     );
 
     this.hasSearcher = false;
 
-    this.inputElement.addEventListener('keypress', (event) => {
+    this.inputElement.addEventListener('keypress', event => {
       if (event.keyCode === 13) {
         this.submitElement.click();
         this.inputElement.blur();

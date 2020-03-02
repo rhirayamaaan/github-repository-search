@@ -12,8 +12,8 @@ export default class Fetcher {
 
   async get(parameter = {}) {
     const stringParameter = Object.entries(parameter)
-        .map((element) => `${element[0]}=${encodeURIComponent(element[1])}`)
-        .join('&');
+      .map(element => `${element[0]}=${encodeURIComponent(element[1])}`)
+      .join('&');
 
     this.request.open('GET', `${this.url}?${stringParameter}`, true);
 
@@ -23,24 +23,24 @@ export default class Fetcher {
           resolve(this.request.response);
         } else {
           reject(
-              new FetchException(this.request.status, this.request.statusText)
+            new FetchException(this.request.status, this.request.statusText)
           );
         }
       };
 
       this.request.onerror = () => {
         reject(
-            new FetchException(this.request.status, this.request.statusText)
+          new FetchException(this.request.status, this.request.statusText)
         );
       };
 
       this.request.onabort = () => {
         resolve(
-            new FetchException(
-                this.request.status,
-                `${this.url} has been aborted`,
-                true
-            )
+          new FetchException(
+            this.request.status,
+            `${this.url} has been aborted`,
+            true
+          )
         );
       };
 

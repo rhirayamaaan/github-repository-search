@@ -10,21 +10,21 @@ class SearchItem {
     <p class="${NAMESPACE}__name">${name}</p>
     ${isPrivate ? `<p class="${NAMESPACE}__private">Private</p>` : ''}
     ${
-      description ?
-        `<p class="${NAMESPACE}__description">${description}</p>` :
-        ''
-}
+      description
+        ? `<p class="${NAMESPACE}__description">${description}</p>`
+        : ''
+    }
     ${language ? `<p class="${NAMESPACE}__language">${language}</p>` : ''}
     </a>`;
   }
 
   constructor(name, isPrivate, url, description, language) {
     const innerHTML = SearchItem.createChildElement(
-        name,
-        isPrivate,
-        url,
-        description,
-        language
+      name,
+      isPrivate,
+      url,
+      description,
+      language
     );
 
     this.element = document.createElement('li');
@@ -58,13 +58,13 @@ export default class SearchItems {
 
       for (const item of items) {
         this.element.appendChild(
-            new SearchItem(
-                item.name,
-                item.isPrivate,
-                item.url,
-                item.description,
-                item.language
-            ).element
+          new SearchItem(
+            item.name,
+            item.isPrivate,
+            item.url,
+            item.description,
+            item.language
+          ).element
         );
       }
     } else {

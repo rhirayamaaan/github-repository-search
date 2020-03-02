@@ -1,3 +1,3 @@
 export default {
-  'SEARCH_API': 'https://api.github.com/search/repositories',
+  SEARCH_API: 'https://api.github.com/search/repositories'
 };

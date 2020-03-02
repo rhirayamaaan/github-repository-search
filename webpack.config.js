@@ -1,39 +1,39 @@
 const path = require('path');
 
-const createStyleLoaders = (isProduction) => [
+const createStyleLoaders = isProduction => [
   'style-loader',
   {
     loader: 'css-loader',
     options: {
-      sourceMap: !isProduction,
-    },
+      sourceMap: !isProduction
+    }
   },
   {
     loader: 'postcss-loader',
     options: {
-      plugins: [require('autoprefixer'), require('csswring')],
-    },
-  },
+      plugins: [require('autoprefixer'), require('postcss-clean')]
+    }
+  }
 ];
 
-module.exports = (env) => ({
+module.exports = env => ({
   mode: 'production',
   entry: ['./src/App.js'],
   output: {
     publicPath: '/',
     path: `${__dirname}/dist/`,
-    filename: 'bundle.js',
+    filename: 'bundle.js'
   },
   resolve: {
     // importする拡張子の指定
-    extensions: ['.js', '.scss', '.css'],
+    extensions: ['.js', '.scss', '.css']
   },
   // loaderの設定
   module: {
     rules: [
       {
         test: /\.css$/,
-        use: createStyleLoaders(env.production),
+        use: createStyleLoaders(env.production)
       },
       {
         test: /\.scss$/,
@@ -45,17 +45,13 @@ module.exports = (env) => ({
             options: {
               sourceMap: !env.production,
               prependData: `@import "${path.resolve(
-                  __dirname,
-                  'src/lib/styles/_variables'
-              )}";`,
-              // sassOptions: {
-              //   data: '@import "~/lib/styles/_variables.scss";',
-              //   includePaths: [path.resolve(__dirname, "src/")]
-              // }
-            },
-          },
-        ],
-      },
-    ],
-  },
+                __dirname,
+                'src/lib/styles/_variables'
+              )}";`
+            }
+          }
+        ]
+      }
+    ]
+  }
 });

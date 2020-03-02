@@ -8,7 +8,7 @@ export default class AsyncSetTimeout {
   }
 
   execute() {
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       this.timerId = setTimeout(async () => {
         this.timerId = null;
         resolve(await this.func());
