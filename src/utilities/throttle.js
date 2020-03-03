@@ -8,23 +8,23 @@ class ThrottleException {
   }
 }
 
-export function throttle(func, delay = 0) {
+export function throttle(func, interval = 0) {
   let executeTime = null; // 実行予定時間
   let asyncSetTimeout = null;
   let executing = false; // func が実行中かどうか判定
-  let rejectAsyncFunction = null; // func の実行を外部から中断するためのもの
+  let executeRejector = null; // func の実行を外部から中断するためのもの
 
   const execute = (...rest) => async () => {
     executing = true;
 
     // 非同期中に関数実行を中止できるように promise を発行する
-    const asyncFunction = () =>
+    const asyncExecuter = () =>
       new Promise(async (resolve, reject) => {
-        rejectAsyncFunction = reject;
+        executeRejector = reject;
         resolve(await func(...rest));
       });
 
-    return await asyncFunction()
+    return await asyncExecuter()
       .then(done => {
         executing = false;
         return done;
@@ -37,28 +37,28 @@ export function throttle(func, delay = 0) {
       });
   };
 
-  const controller = async (...rest) => {
+  const handler = async (...rest) => {
     // 非同期実行中に再度実行されたら中断
-    if (executing && typeof rejectAsyncFunction === 'function') {
-      rejectAsyncFunction(new ThrottleException(...rest));
-      rejectAsyncFunction = null;
+    if (executing && typeof executeRejector === 'function') {
+      executeRejector(new ThrottleException(...rest));
+      executeRejector = null;
     }
 
     if (executeTime > performance.now()) {
-      // delay 中ならタイマー削除
+      // 間引き中ならタイマー削除
       if (asyncSetTimeout instanceof AsyncSetTimeout) {
         asyncSetTimeout.cancel();
       }
       asyncSetTimeout = null;
     } else {
-      // delay していないなら実行時間を決定
-      executeTime = performance.now() + delay;
+      // 間引きしていないなら実行時間を決定
+      executeTime = performance.now() + interval;
     }
 
     if (asyncSetTimeout === null) {
       asyncSetTimeout = new AsyncSetTimeout(
         execute(...rest),
-        executeTime - performance.now() // delay させるタイミングを短くしていく
+        executeTime - performance.now() // interval させるタイミングを短くしていく
       );
 
       return await asyncSetTimeout
@@ -71,10 +71,10 @@ export function throttle(func, delay = 0) {
         // 非同期実行中に reject された場合、reject 時の引数の値でリトライする
         .catch(async throttleException => {
           asyncSetTimeout = null;
-          return await controller(...throttleException.rest);
+          return await handler(...throttleException.rest);
         });
     }
   };
 
-  return controller;
+  return handler;
 }
