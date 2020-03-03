@@ -9,7 +9,7 @@ import { throttle } from './utilities/throttle';
   const main = new Main();
   const mainService = new MainService();
 
-  const throttleMainSerivceGetter = throttle(
+  const throttleMainServiceGetter = throttle(
     (...rest) => mainService.get(...rest),
     2000
   );
@@ -22,7 +22,7 @@ import { throttle } from './utilities/throttle';
   main.searcher = async (query = '') => {
     main.isLoading = true;
     main.data = initialMainData;
-    await throttleMainSerivceGetter({ q: query })
+    await throttleMainServiceGetter({ q: query })
       .then(done => {
         main.data = done;
         main.isLoading = false;
