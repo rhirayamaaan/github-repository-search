@@ -42,6 +42,7 @@ export function throttle(func, interval = 0) {
     if (executing && typeof executeRejector === 'function') {
       executeRejector(new ThrottleException(...rest));
       executeRejector = null;
+      return;
     }
 
     if (executeTime > performance.now()) {
